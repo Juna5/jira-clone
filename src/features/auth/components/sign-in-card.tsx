@@ -16,11 +16,11 @@ import {
 } from "@/components/ui/form";
 
 const formSchema = z.object({
-    email: z.string().trim().min(1, "Required").email("Invalid email address"),
-    // password: z
-    //     .string()
-    //     .min(8, "Password must be at least 8 characters")
-    //     .max(256),
+    email: z.string().email("Invalid email address"),
+    password: z
+        .string()
+        .min(8, "Password must be at least 8 characters")
+        .max(256),
 });
 
 export const SignInCard = () => {
@@ -28,7 +28,7 @@ export const SignInCard = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: "",
-            // password: "",
+            password: "",
         },
     });
 
@@ -60,6 +60,22 @@ export const SignInCard = () => {
                                             {...field}
                                             type="email"
                                             placeholder="Enter email address"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            name="password"
+                            control={form.control}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            type="password"
+                                            placeholder="Enter password"
                                         />
                                     </FormControl>
                                     <FormMessage />
