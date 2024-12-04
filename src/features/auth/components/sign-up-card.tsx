@@ -21,19 +21,14 @@ import {
     FormItem,
     FormMessage,
 } from "@/components/ui/form";
-
-const formSchema = z.object({
-    name: z.string().min(3, "Name must be at least 3 characters"),
-    email: z.string().email("Invalid email address"),
-    password: z
-        .string()
-        .min(8, "Password must be at least 8 characters")
-        .max(256),
-});
+import { registerSchema } from "@/features/auth/schemas";
+import { useRegister } from "@/features/auth/api/use-register";
 
 export const SignUpCard = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const { mutate } = useRegister();
+
+    const form = useForm<z.infer<typeof registerSchema>>({
+        resolver: zodResolver(registerSchema),
         defaultValues: {
             name: "",
             email: "",
@@ -41,8 +36,8 @@ export const SignUpCard = () => {
         },
     });
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values);
+    const onSubmit = (values: z.infer<typeof registerSchema>) => {
+        mutate(values);
     };
     return (
         <Card className="w-full h-full md:w-[487px] border-none shadow-none">
