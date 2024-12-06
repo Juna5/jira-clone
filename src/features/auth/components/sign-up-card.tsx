@@ -112,7 +112,7 @@ export const SignUpCard = () => {
                             )}
                         />
                         <Button disabled={false} size="lg" className="w-full">
-                            Login
+                            Register
                         </Button>
                     </form>
                 </Form>

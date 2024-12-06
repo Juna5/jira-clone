@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
     return (
-        <div className="flex gap-4">
-            <Button>Clic jsd</Button>
-            <Button variant="secondary">Click</Button>
+        <div className="">
+            <Button>
+                <Link href="/sign-in">Login</Link>
+            </Button>
         </div>
     );
 }
