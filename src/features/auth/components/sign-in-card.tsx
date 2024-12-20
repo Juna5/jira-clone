@@ -1,3 +1,5 @@
+"use client";
+
 import { z } from "zod";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
@@ -19,7 +21,7 @@ import { loginSchema } from "@/features/auth/schemas";
 import { useLogin } from "@/features/auth/api/use-login";
 
 export const SignInCard = () => {
-    const { mutate } = useLogin();
+    const { mutate, isPending } = useLogin();
 
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
@@ -79,8 +81,19 @@ export const SignInCard = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button disabled={false} size="lg" className="w-full">
-                            Login
+                        <Button
+                            disabled={isPending}
+                            size="lg"
+                            className="w-full"
+                        >
+                            {isPending ? (
+                                <>
+                                    <div className="spinner-border animate-spin border-4 border-t-4 border-gray-200 w-6 h-6 mr-2" />
+                                    Processing...
+                                </>
+                            ) : (
+                                "Login"
+                            )}
                         </Button>
                     </form>
                 </Form>
@@ -89,11 +102,21 @@ export const SignInCard = () => {
                 <DottedSeparator />
             </div>
             <CardContent className="p-7 flex flex-col gap-y-4">
-                <Button variant="secondary" size="lg" className="w-full">
+                <Button
+                    variant="secondary"
+                    size="lg"
+                    className="w-full"
+                    disabled={isPending}
+                >
                     <FcGoogle className="mr-2 size-5" />
                     Login with Google
                 </Button>
-                <Button variant="secondary" size="lg" className="w-full">
+                <Button
+                    variant="secondary"
+                    size="lg"
+                    className="w-full"
+                    disabled={isPending}
+                >
                     <FaGithub className="mr-2 size-5" />
                     Login with Github
                 </Button>
