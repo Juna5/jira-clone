@@ -3,6 +3,7 @@
 import { z } from "zod";
 import Image from "next/image";
 import { useRef } from "react";
+import { cn } from "@/lib/utils";
 import { ImageIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -161,6 +162,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                                 variant="secondary"
                                 onClick={onCancel}
                                 disabled={isPending}
+                                className={cn(!onCancel && "invisible")}
                             >
                                 Cancel
                             </Button>
