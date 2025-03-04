@@ -66,4 +66,13 @@ body {
         --chart-4: 280 65% 60%;
         --chart-5: 340 75% 55%;
     }
+
+    .hide-scrollbar {
+        -ms-overflex-style: nonde;
+        scrollbar-width: none;
+    }
+
+    .hide-scrollbar::--webkit-scrollbar {
+        display:none;
+    }
 }
